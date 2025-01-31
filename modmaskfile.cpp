@@ -30,6 +30,8 @@ ModMaskFile::ModMaskFile(QWidget *parent)
      QObject::connect(ui->radioButton_And, SIGNAL(clicked()), modingFile, SLOT(changeOperationAnd()));
      QObject::connect(ui->radioButton_Or, SIGNAL(clicked()), modingFile, SLOT(changeOperationOr()));
      QObject::connect(ui->radioButton_Xor, SIGNAL(clicked()), modingFile, SLOT(changeOperationXor()));
+     QObject::connect(ui->hexBox, SIGNAL(clicked(bool)),modingFile, SLOT(isHex(bool)));
+     QObject::connect(ui->hexBox, SIGNAL(clicked(bool)), this, SLOT(changetoHex(bool)));
 
      //перезапись выходного
       QObject::connect(ui->rewriteBox, SIGNAL(clicked(bool)),modingFile, SLOT(rewriteOut(bool)));

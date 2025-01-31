@@ -178,6 +178,13 @@
       <widget class="QLineEdit" name="lineEdit"/>
      </item>
      <item>
+      <widget class="QCheckBox" name="hexBox">
+       <property name="text">
+        <string>is HEX</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QRadioButton" name="radioButton_And">
        <property name="text">
         <string>AND</string>

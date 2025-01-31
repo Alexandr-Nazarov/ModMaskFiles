@@ -51,6 +51,7 @@ public slots:
    void start();
 
    void push_start_button();
+
 };
 #endif // MODMASKFILE_H
 

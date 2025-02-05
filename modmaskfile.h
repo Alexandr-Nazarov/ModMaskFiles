@@ -36,7 +36,7 @@ private:
     QTimer *timer;
 
 signals:
-void toChangeFile(QTextStream&, QFileInfo, QString);
+void toChangeFile(/*QTextStream*/QByteArray&, QFileInfo, QString);
 void dirName(QString);
 
 public slots:
@@ -51,6 +51,8 @@ public slots:
    void start();
 
    void push_start_button();
+
+   void changetoHex(bool);
 
 };
 #endif // MODMASKFILE_H

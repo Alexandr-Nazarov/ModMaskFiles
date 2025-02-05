@@ -23,8 +23,8 @@ ModMaskFile::ModMaskFile(QWidget *parent)
 
     //старт
      QObject::connect(ui->StartButton, SIGNAL(clicked()), this, SLOT (/*start()*/push_start_button() ));
-     QObject::connect(this, SIGNAL(toChangeFile(QTextStream&, QFileInfo, QString)), modingFile, SLOT(toChangeFile(QTextStream&, QFileInfo, QString)));
-
+    // QObject::connect(this, SIGNAL(toChangeFile(QTextStream&, QFileInfo, QString)), modingFile, SLOT(toChangeFile(QTextStream&, QFileInfo, QString)));
+     QObject::connect(this, SIGNAL(toChangeFile(QByteArray&, QFileInfo, QString)), modingFile, SLOT(toChangeFile(QByteArray&, QFileInfo, QString)));
     //смена переменной и операции
      QObject::connect(ui->lineEdit, SIGNAL(textChanged(QString)), modingFile, SLOT(changeVariadic(QString)));
      QObject::connect(ui->radioButton_And, SIGNAL(clicked()), modingFile, SLOT(changeOperationAnd()));
@@ -77,8 +77,16 @@ void ModMaskFile::start(){
         if (file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
             QFileInfo fileInfo(file);
-            QTextStream out(&file);
-            emit toChangeFile(out, fileInfo, DirPath);
+        //    QTextStream out(&file);
+
+            //=====
+             QByteArray ar_file=file.readAll();
+             emit toChangeFile(ar_file, fileInfo, DirPath);
+        //     qDebug()<<ar_file;
+            //====
+
+
+       //     emit toChangeFile(out, fileInfo, DirPath);
 
             file.close();
             //удаление исходного
@@ -102,4 +110,14 @@ void ModMaskFile::push_start_button(){
     }
 }
 
+void ModMaskFile::changetoHex(bool hex){
 
+    QString tmp(ui->lineEdit->text());
+    if (hex) {
+        tmp.push_front("0x");
+        ui->lineEdit->setText(tmp);
+    } else {
+        tmp.remove(0,2);
+        ui->lineEdit->setText(tmp);
+     }
+}

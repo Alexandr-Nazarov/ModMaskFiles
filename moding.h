@@ -7,6 +7,7 @@
 #include <QString>
 #include <QFileInfo>
 #include <QByteArray>
+#include <QDataStream>
 
 enum class BINAR{AND, OR, XOR};
 
@@ -25,10 +26,10 @@ public:
 
 public slots:
 
-    void toChangeFile(QTextStream&, const QFileInfo, const QString);
+    void toChangeFile(/*QTextStream*/QByteArray&, const QFileInfo, const QString);
 
     void changeVariadic(const QString& tmp) { if (is_hex) { variadic=QByteArray::fromHex(tmp.toUtf8().remove(0,2));} //0xa3f411b3432f31c2
-                                                         else  {variadic= tmp.toUtf8();}  qDebug()<<variadic.toHex();}
+                                                         else  {variadic= tmp.toUtf8();}  /*qDebug()<<variadic.toHex();*/}
 
     void changeOperationAnd(){operation=BINAR::AND; }
     void changeOperationOr(){operation=BINAR::OR; }
